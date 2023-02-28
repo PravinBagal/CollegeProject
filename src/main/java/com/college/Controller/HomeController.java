@@ -23,6 +23,7 @@ public class HomeController {
 
 	@PostMapping("/addData")
 	public String addData(@RequestBody College college) {
+		System.out.println("Adding Data");
 		hs.saveData(college);
 		return "Data Added Successfully";
 	}
