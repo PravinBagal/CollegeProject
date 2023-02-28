@@ -1,0 +1,84 @@
+server:
+  port: 7080
+spring:
+  profiles:
+    active: dev, swagger
+  application:
+    name: College
+  datasource:
+    driver-class-name: org.postgresql.Driver
+    #password: Akhil@2021
+    password: postgres
+    url: jdbc:postgresql://localhost:5432/college
+    username: postgres
+    
+  jpa:
+    generate-ddl: true
+    hibernate:
+      ddl-auto: create
+    properties:
+      hibernate:
+        dialect: org.hibernate.dialect.PostgreSQLDialect
+        format_sql: true
+node_type_name:
+  occ: OCC
+  sdp: SDP
+node_scheduler:
+  node-status-schedule-job-enabled: false
+  node-status-schedule-job-interval: 3600000
+  
+ansible:    
+  script_execution_path: /root/ccm/playbook/
+ 
+node:
+  inventory_path: /root/inventory/
+  ansible_execution_log_path: /root/ccm/collectedConfig/
+  playbook:
+    path: /root/ansible/playbook/
+    space-check-playbook: Server_Space_Info.yml
+  sma-lite-pro:
+    ssh-conn-time-out: 10000
+    min-sdp-node-space: 2G
+    dedicated-sdp-sever:
+      min-space-required-per-node: 100M
+      buffer-space-for-bcc: 200M
+    status-scheduler:
+      enabled: true
+      interval: 1800000
+  client:
+    user-management:
+      service-url: http://localhost:8080/api/user-management/v1/
+          
+# Log related configurations
+logging:
+  file:
+    path: ./logs
+    name: ./logs/ccm-nodeInventory.log
+    max-size: 10MB
+  pattern:
+    console: "[%d] %-5level [%logger.%M:%L] [%thread]: %msg%n"
+    file: "[%d] %-5level [%logger.%M:%L] [%thread]: %msg%n"
+    rolling-file-name : ./logs/ccm-nodeInventory-%d{yyyy-MM-dd}.%i.log
+  level:      
+    root: ERROR
+    com.ericsson.tmo.cm.ccm.node.inventory: INFO
+    org.hibernate.SQL: ERROR
+    org.hibernate.type.descriptor.sql.BasicBinder: ERROR
+    com.zaxxer.hikari.HikariConfig: ERROR         
+                       
+dateFormateConfigurable:
+  date-format: MM/dd/yyyy HH:mm:ss
+  #service-url: http://localhost:7080/api/node-inventory/v1/
+#  main:
+#    banner-mode: 'off'
+#eureka:  
+#  client:
+#    registerWithEureka: true
+#    fetchRegistry: true
+#    serviceUrl:
+#      defaultZone: ${DISCOVERY_URL:http://localhost:8761}/eureka/
+      #defaultZone: ${vcap.services.eureka-service.credentials.uri:http://10.174.131.112:8761}/eureka/
+#  instance:
+#    leaseRenewalIntervalInSeconds: 60
+#    leaseExpirationDurationInSeconds: 66
+
