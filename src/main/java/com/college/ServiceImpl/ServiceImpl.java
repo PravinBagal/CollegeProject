@@ -19,7 +19,7 @@ public class ServiceImpl implements HomeService {
 	HomeRepository hr;
 
 	private static final Logger logger = LoggerFactory.getLogger(ServiceImpl.class);
-	
+
 	@Override
 	public void saveData(College college) {
 		// int c = college.getCid();
@@ -34,8 +34,7 @@ public class ServiceImpl implements HomeService {
 
 	@Override
 	public List<College> getData() {
-		//return hr.findAll();
-
+		// return hr.findAll();
 		List<College> colleges = new ArrayList<>();
 		hr.findAll().forEach(colleges::add);
 		return colleges;
