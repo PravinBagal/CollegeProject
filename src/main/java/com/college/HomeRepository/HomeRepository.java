@@ -7,7 +7,7 @@ import com.college.model.College;
 
 @Repository
 public interface HomeRepository extends JpaRepository<College, Integer> {
-//	public Integer findByCid(Integer cid);
-//	select * from college where cid=?
-	//College GetByIdData(int cid);
+
+    College findByCid(int cid);
+	//College findByCid(int c);
 }
