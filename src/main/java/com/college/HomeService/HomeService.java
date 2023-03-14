@@ -12,7 +12,7 @@ public interface HomeService {
 
 	void deleteData(int cid);
 
-	void updateData(College c);
+	College updateData(College c, int cid);
 
 	College GetIdByData(int cid);
 

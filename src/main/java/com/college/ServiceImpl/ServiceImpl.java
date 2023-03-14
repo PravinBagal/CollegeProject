@@ -2,6 +2,7 @@ package com.college.ServiceImpl;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -45,10 +46,10 @@ public class ServiceImpl implements HomeService {
 		hr.deleteById(cid);
 	}
 
-	@Override
-	public void updateData(College c) {
-		hr.save(c);
-	}
+	// @Override
+	// public void updateData(College c) {
+	// hr.save(c);
+	// }
 
 	@Override
 	public College GetIdByData(int cid) {
@@ -57,5 +58,11 @@ public class ServiceImpl implements HomeService {
 			logger.info("This is data is not present");
 		}
 		return hr.findById(cid).get();
+	}
+
+	@Override
+	public College updateData(College c, int cid) {
+		College college = hr.findById(cid).get();
+		return hr.save(c);
 	}
 }

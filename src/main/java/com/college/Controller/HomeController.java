@@ -3,7 +3,6 @@ package com.college.Controller;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -38,10 +37,10 @@ public class HomeController {
 		return "Delete Data Successfully";
 	}
 
-	@PutMapping("/updateData")
-	public String updateData(@RequestBody College c) {
-		hs.updateData(c);
-		return "Update Data Successfully";
+	@PutMapping("/updateData/{cid}")
+	public College updateData(@RequestBody College c,@PathVariable ("cid") int cid) {
+		hs.updateData(c,cid);
+		return c;
 	}
 
 	@GetMapping("/GetIdByData/{cid}")
