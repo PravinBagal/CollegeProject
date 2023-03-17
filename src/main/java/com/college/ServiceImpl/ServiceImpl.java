@@ -9,6 +9,7 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.college.Exceptions.ResourceNotFoundException;
 import com.college.HomeRepository.HomeRepository;
 import com.college.HomeService.HomeService;
 import com.college.model.College;
@@ -42,7 +43,8 @@ public class ServiceImpl implements HomeService {
 	}
 
 	@Override
-	public void deleteData(int cid) {
+	public void deleteData(int cid) throws ResourceNotFoundException {
+		hr.findById(cid).orElseThrow(()-> new ResourceNotFoundException("College not found for this ID:"+cid));
 		hr.deleteById(cid);
 	}
 
@@ -61,8 +63,8 @@ public class ServiceImpl implements HomeService {
 	}
 
 	@Override
-	public College updateData(College c, int cid) {
-		College college = hr.findById(cid).get();
+	public College updateData(College c, int cid) throws ResourceNotFoundException {
+		College college= hr.findById(cid).orElseThrow(()-> new ResourceNotFoundException("College not found for this ID:"+cid));
 		return hr.save(c);
 	}
 }

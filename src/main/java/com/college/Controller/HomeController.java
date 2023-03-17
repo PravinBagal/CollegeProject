@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.college.Exceptions.ResourceNotFoundException;
 import com.college.HomeService.HomeService;
 import com.college.model.College;
 
@@ -32,13 +33,13 @@ public class HomeController {
 	}
 
 	@DeleteMapping("/deleteData/{cid}")
-	public String deleteData(@PathVariable("cid") int cid) {
+	public String deleteData(@PathVariable("cid") int cid) throws ResourceNotFoundException {
 		hs.deleteData(cid);
 		return "Delete Data Successfully";
 	}
 
 	@PutMapping("/updateData/{cid}")
-	public College updateData(@RequestBody College c,@PathVariable ("cid") int cid) {
+	public College updateData(@RequestBody College c,@PathVariable ("cid") int cid) throws ResourceNotFoundException {
 		hs.updateData(c,cid);
 		return c;
 	}
